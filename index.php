@@ -22,4 +22,6 @@ function autoLoader($className)
 }
 spl_autoload_register('autoLoader');
 
+$router = new Application\Router();
+
 echo 'Hello world. Yes, I am actually doing this.';
