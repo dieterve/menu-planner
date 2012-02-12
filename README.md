@@ -16,3 +16,5 @@ I would like the following features:
 * Remove a meal and generate a new one
 * A "these 2 items are not a good mix"
 * Be intelligent and remember good combinations
+* Be intelligent and take seasons in account
+* Be intelligent and remember preferences (for example: spaghetti only in weekends)
