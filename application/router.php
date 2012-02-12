@@ -5,7 +5,7 @@ namespace Application;
 /**
  * The router will map a path to a callback.
  *
- * @later create an Router interface
+ * @later create a Router interface
  *
  * @author Dieter Vanden Eynde <dieter@dieterve.be>
  */
