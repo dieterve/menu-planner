@@ -62,7 +62,7 @@ class Router
 	 *
 	 * @return string
 	 */
-	protected function getPath()
+	public function getPath()
 	{
 		$path = $_SERVER['REQUEST_URI'];
 
