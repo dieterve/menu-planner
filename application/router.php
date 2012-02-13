@@ -41,6 +41,21 @@ class Router
 	}
 
 	/**
+	 * Build a regular expression for a route.
+	 *
+	 * @param string $route
+	 * @return string
+	 */
+	public function buildRouteRegex($route)
+	{
+		$regex = $route;
+		$regex = str_ireplace('/', '\/', $regex);
+		$regex = '/^' . $regex . '/i';
+
+		return $regex;
+	}
+
+	/**
 	 * @param string $basePath
 	 */
 	public function setBasePath($basePath)
@@ -90,6 +105,7 @@ class Router
 	{
 		$this->routes[] = array(
 			'route' => $route,
+			'regex' => $this->buildRouteRegex($route),
 			'callback' => $callback
 		);
 	}
@@ -104,7 +120,7 @@ class Router
 
 		foreach($this->routes as $route)
 		{
-			if($route['route'] == $path)
+			if(preg_match($route['regex'], $path))
 			{
 				$route['callback']();
 			}
