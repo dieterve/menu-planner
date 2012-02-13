@@ -50,6 +50,7 @@ class Router
 	{
 		$regex = $route;
 		$regex = str_ireplace('/', '\/', $regex);
+		$regex = preg_replace('/(:[a-zA-Z0-9]+)/', '(.*)', $regex);
 		$regex = '/^' . $regex . '/i';
 
 		return $regex;
@@ -120,9 +121,13 @@ class Router
 
 		foreach($this->routes as $route)
 		{
-			if(preg_match($route['regex'], $path))
+			$matches = array();
+			if(preg_match($route['regex'], $path, $matches))
 			{
-				$route['callback']();
+				// remove the full pattern
+				array_shift($matches);
+
+				call_user_func_array($route['callback'], $matches);
 			}
 		}
 	}

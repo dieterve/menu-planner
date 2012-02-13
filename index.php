@@ -4,6 +4,12 @@ require_once('autoload.php');
 
 $router = new Application\Router();
 
+$router->map('/user/:user', function($user)
+{
+	var_dump('user:' . $user);
+	exit;
+});
+
 $router->map('/user', function()
 {
 	var_dump('user');
