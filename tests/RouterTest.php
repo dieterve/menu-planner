@@ -35,10 +35,26 @@ class RouterTest extends PHPUnit_Framework_TestCase
 		{
 			echo 'path';
 		});
-
 		$this->checkResponse($router, '/path', 'path');
 		$this->checkResponse($router, '/path?param1=test', 'path');
 		$this->checkResponse($router, '/unrelated?param1=test', '');
+
+		$router->map('/user/:user', function($user)
+		{
+			echo $user;
+		});
+		$this->checkResponse($router, '/user', '');
+		$this->checkResponse($router, '/user/dieter', 'dieter');
+		$this->checkResponse($router, '/user/dieter?param1=test', 'dieter');
+
+		$router->map('/user/:user/:action', function($user, $action)
+		{
+			echo $user . '-' . $action;
+		});
+		$this->checkResponse($router, '/user', '');
+		$this->checkResponse($router, '/user/dieter', '');
+		$this->checkResponse($router, '/user/dieter/photos', 'dieter-photos');
+		$this->checkResponse($router, '/user/dieter/photos?param1=test', 'dieter-photos');
 	}
 
 	private function checkResponse($router, $uri, $expectedOutput)
