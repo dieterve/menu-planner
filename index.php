@@ -4,6 +4,13 @@ require_once('autoload.php');
 
 $router = new Application\Router();
 
+$router->map('/user/:user/:action', function($user, $action)
+{
+	var_dump('user:' . $user);
+	var_dump('action:' . $action);
+	exit;
+});
+
 $router->map('/user/:user', function($user)
 {
 	var_dump('user:' . $user);
@@ -13,6 +20,12 @@ $router->map('/user/:user', function($user)
 $router->map('/user', function()
 {
 	var_dump('user');
+	exit;
+});
+
+$router->map('/:path', function($path)
+{
+	var_dump('404 Could not find: ' . $path);
 	exit;
 });
 
