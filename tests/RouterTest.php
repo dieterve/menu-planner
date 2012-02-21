@@ -39,6 +39,7 @@ class RouterTest extends PHPUnit_Framework_TestCase
 		$this->checkResponse($router, '/path?param1=test', 'path');
 		$this->checkResponse($router, '/unrelated?param1=test', '');
 
+		$router = new Application\Router();
 		$router->map('/user/:user', function($user)
 		{
 			echo $user;
@@ -46,7 +47,9 @@ class RouterTest extends PHPUnit_Framework_TestCase
 		$this->checkResponse($router, '/user', '');
 		$this->checkResponse($router, '/user/dieter', 'dieter');
 		$this->checkResponse($router, '/user/dieter?param1=test', 'dieter');
+		$this->checkResponse($router, '/user/dieter/photos?param1=test', 'dieter');
 
+		$router = new Application\Router();
 		$router->map('/user/:user/:action', function($user, $action)
 		{
 			echo $user . '-' . $action;
