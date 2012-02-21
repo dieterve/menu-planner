@@ -50,7 +50,7 @@ class Router
 	{
 		$regex = $route;
 		$regex = str_ireplace('/', '\/', $regex);
-		$regex = preg_replace('/(:[a-zA-Z0-9]+)/', '([^\/]*)', $regex);
+		$regex = preg_replace('/(:[a-zA-Z0-9]+)/', '([^\/]+)', $regex);
 		$regex = '/^' . $regex . '/i';
 
 		return $regex;
