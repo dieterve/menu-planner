@@ -2,7 +2,10 @@
 
 require_once('autoload.php');
 
-$router = new Application\Router();
+use Application\Application;
+use Application\Router;
+
+$router = new Router();
 
 $router->map('/user/:user/:action', function($user, $action)
 {
@@ -35,6 +38,8 @@ $router->map('/', function()
 	exit;
 });
 
-$router->process();
+$application = new Application();
+$application->setRouter($router);
+$application->run();
 
 echo 'Hello world. Yes, I am actually doing this.';
