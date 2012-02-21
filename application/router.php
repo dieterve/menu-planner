@@ -61,7 +61,7 @@ class Router
 	 */
 	public function setBasePath($basePath)
 	{
-		$this->basePath = (string) $basePath;
+		$this->basePath = rtrim((string) $basePath, '/');
 	}
 
 	/**
@@ -88,7 +88,11 @@ class Router
 			$path = mb_substr($path, 0, mb_stripos($path, '?'));
 		}
 
-		// @later strip the base path from the *beginning* of the path
+		// strip the base path from the *beginning* of the path
+		if(mb_stripos('@@@' . $path, '@@@' . $this->getBasePath()) !== false)
+		{
+			$path = mb_substr($path, mb_strlen($this->getBasePath()));
+		}
 
 		// strip the trailing slash (we do want the starting slash)
 		if(mb_strlen($path) > 1) $path = rtrim($path, '/');
