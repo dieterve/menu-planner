@@ -14,7 +14,6 @@
 function autoLoader($className)
 {
 	$chunks = explode('\\', $className);
-	$chunks = array_map('strtolower', $chunks);
 
 	$path = __DIR__ . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $chunks) . '.php';
 
