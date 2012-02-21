@@ -104,9 +104,9 @@ class Router
 	 * Map a route to a callback function.
 	 *
 	 * @param string $route
-	 * @param mixed $callback
+	 * @param Closure $callback
 	 */
-	public function map($route, $callback)
+	public function map($route, \Closure $callback)
 	{
 		$this->routes[] = array(
 			'route' => $route,
