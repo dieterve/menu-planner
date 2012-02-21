@@ -57,6 +57,18 @@ class RouterTest extends PHPUnit_Framework_TestCase
 		$this->checkResponse($router, '/user/dieter/photos?param1=test', 'dieter-photos');
 	}
 
+	public function testMappingWithBasePath()
+	{
+		$router = new Application\Router('/subdir');
+		$router->map('/path', function()
+		{
+			echo 'path';
+		});
+		$this->checkResponse($router, '/subdir/path', 'path');
+		$this->checkResponse($router, '/subdir/path?param1=test', 'path');
+		$this->checkResponse($router, '/subdir/unrelated?param1=test', '');
+	}
+
 	private function checkResponse($router, $uri, $expectedOutput)
 	{
 		$_SERVER['REQUEST_URI'] = $uri;
