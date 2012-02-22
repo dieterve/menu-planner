@@ -2,8 +2,8 @@
 
 require_once('autoload.php');
 
-use Application\Application;
-use Application\Router;
+use \Application\Application;
+use \Application\Router;
 
 $router = new Router();
 
