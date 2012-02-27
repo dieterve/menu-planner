@@ -22,16 +22,28 @@ class Application
 	 *
 	 * @param string $route
 	 * @param string $controller
-	 * @param string[optional] $action
+	 * @param string[optional] $action Action to call inside the controller. If omitted the constructor is used.
 	 */
-	public function addRoute($route, $controller, $action = 'execute')
+	public function addRoute($route, $controller, $action = null)
 	{
 		$this->router->map($route, function() use ($controller, $action)
 		{
 			// params extracted from the URL by the router
 			$params = func_get_args();
 
-			// @todo find a non-static way to call the controller with the params from the router
+			// execute the constructor
+			if($action === null)
+			{
+				$reflection = new \ReflectionClass($controller);
+			    $object = $reflection->newInstanceArgs($params);
+			}
+
+			// execute the specified action
+			else
+			{
+				$object = new $controller();
+				call_user_func_array(array($object, $action), $params);
+			}
 		});
 	}
 
