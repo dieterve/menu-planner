@@ -8,6 +8,7 @@ use \Application\Router;
 $application = new Application();
 $application->setRouter(new Router());
 
-$application->addRoute('/user/:user', '\Modules\Menu\Controller\Index');
+// routes
+$application->addRoute('/', '\Modules\Menu\Controller\Index');
 
 $application->run();
