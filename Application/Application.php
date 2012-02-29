@@ -18,6 +18,14 @@ class Application
 	private $router;
 
 	/**
+	 * @param Router $router
+	 */
+	public function __construct(Router $router)
+	{
+		$this->router = $router;
+	}
+
+	/**
 	 * Add a route and the controller to map it too.
 	 *
 	 * @param string $route
@@ -28,7 +36,7 @@ class Application
 	{
 		$this->router->map($route, function() use ($controller, $action)
 		{
-			// params extracted from the URL by the router
+			// params extracted by the router
 			$params = func_get_args();
 
 			// execute the constructor
@@ -53,15 +61,5 @@ class Application
 	public function run()
 	{
 		$this->router->process();
-	}
-
-	/**
-	 * Router to use for the application
-
-	 * @param Router $router
-	 */
-	public function setRouter(Router $router)
-	{
-		$this->router = $router;
 	}
 }
