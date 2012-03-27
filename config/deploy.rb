@@ -10,10 +10,11 @@ role :web, "dieterve"                          # Your HTTP server, Apache/etc
 role :app, "dieterve"                          # This may be the same as your `Web` server
 
 set :deploy_to, "/home/#{user}/apps/#{application}"
+set :deploy_via, :remote_cache
+
+set :keep_releases, 5
 
 set :use_sudo, false
-
-set :deploy_via, :remote_cache
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
