@@ -1,6 +1,6 @@
 <?php
 
-require_once('autoload.php');
+require_once('../autoload.php');
 
 use \Application\Application;
 use \Application\Router;
