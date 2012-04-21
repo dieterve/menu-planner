@@ -1,26 +1,12 @@
 <?php
 
-/**
- * Autoloader
- *
- * Lets assume for now that our directory structure matches our namespace/class naming.
- *
- * For example:
- * Application\Router is located at application/router.php
- *
- * @author Dieter Vanden Eynde <dieter@dieterve.be>
- * @param string
- */
-function autoLoader($className)
-{
-	$chunks = explode('\\', $className);
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Application/Autoloader.php';
 
-	$path = __DIR__ . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $chunks) . '.php';
+use Application\Autoloader;
 
-	if(@file_exists($path))
-	{
-		require_once($path);
-	}
-}
+$autoloader = new Autoloader();
 
-spl_autoload_register('autoLoader');
+$autoloader->registerNamespace('Application', __DIR__);
+$autoloader->registerNamespace('Modules', __DIR__);
+
+$autoloader->register();
