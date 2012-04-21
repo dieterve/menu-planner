@@ -16,14 +16,31 @@ set :keep_releases, 5
 
 set :use_sudo, false
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+namespace :deploy do
+	task :update do
+		transaction do
+			update_code
+			symlink
+		end
+	end
 
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+	task :finalize_update do
+		transaction do
+			run "chmod -R g+w #{releases_path}/#{release_name}"
+		end
+	end
+
+	task :symlink do
+		transaction do
+			run "ln -nfs #{current_release} #{deploy_to}/#{current_dir}"
+		end
+	end
+
+	task :migrate do
+		# Nothing.
+	end
+
+	task :restart do
+		# Nothing.
+	end
+end
