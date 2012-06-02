@@ -15,11 +15,6 @@ class Autoloader
 	private $namespaces = array();
 
 	/**
-	 * @var array
-	 */
-	private $prefixes = array();
-
-	/**
 	 * Require a class in the registered namespaces.
 	 *
 	 * @param string $class
@@ -29,29 +24,19 @@ class Autoloader
 		$class = (string) $class;
 		$file = '';
 
-		// namespace based class
-		if(strpos($class, '\\') !== false)
-		{
-			foreach($this->namespaces as $namespace => $path)
-			{
-				if(stripos($class, $namespace) !== false)
-				{
-					$file = $path . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
-					break;
-				}
-			}
-		}
+		/*
+		 * Namespace separator differs depending on the naming convention.
+		 *
+		 * PEAR uses _.
+		 */
+		$separator = stripos($class, '\\') ? '\\' : '_';
 
-		// prefix based class
-		else
+		foreach($this->namespaces as $prefix => $path)
 		{
-			foreach($this->prefixes as $prefix => $path)
+			if(stripos($class, $prefix) !== false)
 			{
-				if(stripos($class, $prefix) !== false)
-				{
-					$file = $path . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-					break;
-				}
+				$file = $path . DIRECTORY_SEPARATOR . str_replace($separator, DIRECTORY_SEPARATOR, $class) . '.php';
+				break;
 			}
 		}
 
@@ -95,36 +80,6 @@ class Autoloader
 		foreach($namespaces as $namespace => $path)
 		{
 			$this->registerNamespace($namespace, $path);
-		}
-	}
-
-	/**
-	 * Register the lcoation of classes starting with a given prefix.
-	 * PEAR namingconventions use this.
-	 *
-	 * @param string $prefix
-	 * @param string $path
-	 */
-	public function registerPrefix($prefix, $path)
-	{
-		$this->prefixes[(string) $prefix] = (string) $path;
-	}
-
-	/**
-	 * Register prefixes in bulk.
-	 * Format:
-	 * array(
-	 * 	'Prefix' => '/path/to/prefix',
-	 * 	'Prefix_Sub' => '/path/to/sub',
-	 * );
-	 *
-	 * @param array $prefixes
-	 */
-	public function registerPrefixes(array $prefixes)
-	{
-		foreach($prefixes as $prefix => $path)
-		{
-			$this->registerPrefix($prefix, $path);
 		}
 	}
 }
