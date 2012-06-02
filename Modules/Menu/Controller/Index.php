@@ -11,9 +11,9 @@ class Index
 {
 	public function __construct()
 	{
-		$loader = new \Twig_Loader_String();
+		$loader = new \Twig_Loader_Filesystem(dirname(__FILE__));
 		$twig = new \Twig_Environment($loader);
 
-		echo $twig->render('Home is where my {{ animal }} is!', array('animal' => 'dog'));
+		echo $twig->render('/../View/Index.tpl', array('animal' => 'dog'));
 	}
 }
