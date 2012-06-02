@@ -42,7 +42,7 @@ class Autoloader
 
 		if($file != '' && file_exists($file))
 		{
-			require_once($file);
+			require_once $file;
 		}
 	}
 
