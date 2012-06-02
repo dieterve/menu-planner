@@ -11,6 +11,9 @@ class Index
 {
 	public function __construct()
 	{
-		var_dump('Home is where my dog is.');
+		$loader = new \Twig_Loader_String();
+		$twig = new \Twig_Environment($loader);
+
+		echo $twig->render('Home is where my {{ animal }} is!', array('animal' => 'dog'));
 	}
 }
