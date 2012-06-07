@@ -11,6 +11,13 @@ namespace Application;
 class Application
 {
 	/**
+	 * Dependency container
+	 *
+	 * @var	Container
+	 */
+	private $container;
+
+	/**
 	 * Application router.
 	 *
 	 * @var	Router
@@ -20,8 +27,9 @@ class Application
 	/**
 	 * @param Router $router
 	 */
-	public function __construct(Router $router)
+	public function __construct(Router $router, Container $container)
 	{
+		$this->container = $container;
 		$this->router = $router;
 	}
 
@@ -34,7 +42,8 @@ class Application
 	 */
 	public function addRoute($route, $controller, $action = null)
 	{
-		$this->router->map($route, function() use ($controller, $action)
+		$container = $this->container;
+		$this->router->map($route, function() use ($controller, $action, $container)
 		{
 			// params extracted by the router
 			$params = func_get_args();

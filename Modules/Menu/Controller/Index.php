@@ -2,18 +2,17 @@
 
 namespace Modules\Menu\Controller;
 
+use \Application\Controller;
+
 /**
  * Homepage controller.
  *
  * @author Dieter Vanden Eynde <dieter@netlash.com>
  */
-class Index
+class Index extends Controller
 {
 	public function showIndex()
 	{
-		$loader = new \Twig_Loader_Filesystem(dirname(__FILE__));
-		$twig = new \Twig_Environment($loader);
-
-		echo $twig->render('/../View/Index.tpl', array('animal' => 'dog'));
+		echo $this->container->template->render('/Modules/Menu/View/Index.tpl', array('animal' => 'dog'));
 	}
 }
