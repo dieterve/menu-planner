@@ -9,7 +9,7 @@ namespace Modules\Menu\Controller;
  */
 class Index
 {
-	public function __construct()
+	public function showIndex()
 	{
 		$loader = new \Twig_Loader_Filesystem(dirname(__FILE__));
 		$twig = new \Twig_Environment($loader);

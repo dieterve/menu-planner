@@ -30,7 +30,7 @@ class Application
 	 *
 	 * @param string $route
 	 * @param string $controller
-	 * @param string[optional] $action Action to call inside the controller. If omitted the constructor is used.
+	 * @param string $action Action to call inside the controller.
 	 */
 	public function addRoute($route, $controller, $action = null)
 	{
@@ -39,19 +39,9 @@ class Application
 			// params extracted by the router
 			$params = func_get_args();
 
-			// execute the constructor
-			if($action === null)
-			{
-				$reflection = new \ReflectionClass($controller);
-			    $object = $reflection->newInstanceArgs($params);
-			}
-
 			// execute the specified action
-			else
-			{
-				$object = new $controller();
-				call_user_func_array(array($object, $action), $params);
-			}
+			$object = new $controller($container);
+			call_user_func_array(array($object, $action), $params);
 		});
 	}
 
