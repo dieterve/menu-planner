@@ -18,3 +18,7 @@ I would like the following features:
 * Be intelligent and remember good combinations
 * Be intelligent and take seasons in account
 * Be intelligent and remember preferences (for example: spaghetti only in weekends)
+
+Todo:
+
+* Router Component with a Router interface. Contains a HTTPRouter (url + method), CommandRouter, ...
