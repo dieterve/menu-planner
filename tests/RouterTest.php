@@ -1,6 +1,6 @@
 <?php
 
-require_once '../autoload.php';
+require_once dirname(__FILE__) . '/../autoload.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 class RouterTest extends PHPUnit_Framework_TestCase
