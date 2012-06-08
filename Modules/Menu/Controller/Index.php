@@ -13,6 +13,6 @@ class Index extends Controller
 {
 	public function showIndex()
 	{
-		echo $this->container->template->render('/Modules/Menu/View/Index.tpl', array('animal' => 'dog'));
+		$this->container->template->display('/Modules/Menu/View/Index.tpl', array('animal' => 'dog'));
 	}
 }
