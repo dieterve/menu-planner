@@ -1,3 +1,4 @@
+
 <?php
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'Application/Autoloader.php';
@@ -14,7 +15,7 @@ $autoloader->registerNamespace('Modules', __DIR__);
  *
  * I do not use the autoloader because its much more cooler to use my own shit.
  * Also, I just wanted to learn it myself.
- * Also, I dont like stacking too	 many SPL autoloaders.
+ * Also, I dont like stacking too many SPL autoloaders.
  */
 $composerDir = __DIR__ . '/vendor/composer';
 $autoloader->registerNamespaces(require $composerDir . '/autoload_namespaces.php');
