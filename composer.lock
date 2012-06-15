@@ -1,5 +1,5 @@
 {
-    "hash": "6dde9a2963b8ac6267a74825953f261c",
+    "hash": "a45242849f93480f7d73dc6269dccc04",
     "packages": [
         {
             "package": "twig/twig",
@@ -10,7 +10,7 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "018c52fe59479b65920d18a6461edeb312963f9d"
+            "source-reference": "120c44d68f07ced5b1e08f582f94016f4f2685d6"
         }
     ],
     "packages-dev": null,
