@@ -1,4 +1,10 @@
 {
+	"authors": [
+        {
+            "name": "Dieter Vanden Eynde",
+            "email": "dieter@dieterve.be"
+        }
+    ],
     "require": {
 		"php": "5.3.*",
         "twig/twig": "1.8.*"
